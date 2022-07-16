@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "home",
       routes: {
         "home" : (context) => const MainPage(),
-        //"country" : (context) => CountryPage()
+        "country" : (context) => CountryPage()
       },
     );
   }
