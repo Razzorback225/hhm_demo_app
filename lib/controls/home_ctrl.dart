@@ -17,9 +17,8 @@ void goToUsr(){
   
 }
 
-void openCountryPage(){
-
-  Navigator.pushNamed(ctxt!, 'country');
+void openCountryPage(CountryData country){
+  Navigator.pushNamed(ctxt!, 'country', arguments: country);
 }
 
 void setMarkers(){
@@ -27,7 +26,7 @@ void setMarkers(){
     markers.add(
       Marker(
         markerId: MarkerId(country.countryName),
-        onTap: openCountryPage,
+        onTap: () => openCountryPage(country),
         icon: BitmapDescriptor.defaultMarker,
         position: country.location
       )

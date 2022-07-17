@@ -48,7 +48,7 @@ class _MainPageState extends State<MainPage>{
               );
             }
             else{
-              return const Text("No data");
+              return const Center(child:Text("No data"));
             }
           }
           else{

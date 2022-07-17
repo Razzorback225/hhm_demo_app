@@ -11,7 +11,7 @@ class CountryData{
   double area;
   List<DemonymsData> demonyms;
   int population;
-  Uri flagsUri;
+  String flagsUri;
   CapitalData? capital;
   
   CountryData(this.countryName, /*this.currencyData,*/ this.countryRegion, /*this.languages,*/ this.location, this.area, this.demonyms,this.population, this.flagsUri, {this.capital });

@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 List<String> regions = ["europe", "americas", "asia", "oceania", "africa"];
 String baseUrl = "https://restcountries.com/v3.1/region/";
-String filters = "?fields=name,currencies,region,languages,latlng,are,demonyms,population,flags,capitalInfo";
+String filters = "?fields=name,currencies,capital,region,languages,latlng,area,demonyms,population,flags,capitalInfo";
 
 Future<List<CountryData>>? getAllCountries() async {
   countries = [];
@@ -38,15 +38,15 @@ Future<List<CountryData>>? getAllCountries() async {
                 "f",
                 country["demonyms"]["eng"]["f"]
                 ),
-                                DemonymsData(
+                DemonymsData(
                 "m",
                 country["demonyms"]["eng"]["m"]
                 ),
               ],
               country["population"], 
-              Uri.parse(country["flags"]["svg"]), 
+              country["flags"]["png"], 
               capital : CapitalData(
-                country["capital"]?[0]??"not_found",
+                checkEmptyList(List.castFrom(country["capital"]), 0, returnType : String),
                 LatLng(
                   checkEmptyList(List.castFrom(country["capitalInfo"]["latlng"]),0),                  
                   checkEmptyList(List.castFrom(country["capitalInfo"]["latlng"]),1)                  
@@ -55,20 +55,25 @@ Future<List<CountryData>>? getAllCountries() async {
             )
           );
         }
+      },
+      onError: (error){
+        print("Error : $error");
       }       
     );
   }
-
-  //print("Country 1 : ${countries[0]}");
-
   return countries;
 }
 
-double checkEmptyList(List<dynamic> list, int index){
+dynamic checkEmptyList(List<dynamic> list, int index, {dynamic returnType}){
   if(list.isNotEmpty){
     return list[index];
   }
   else{
-    return 0.0;
+    if(returnType == String){
+      return "No data";
+    }
+    else{
+      return 0.0;
+    }
   }
 }
