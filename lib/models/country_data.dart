@@ -4,7 +4,7 @@ import 'package:hhm_demo_app/models/models.dart';
 
 class CountryData{
   String countryName;
-  /*CurrencyData currencyData;*/
+  List<CurrencyData> currencyData;
   String countryRegion;
   //List<LanguagesData> languages;
   LatLng location;
@@ -14,5 +14,5 @@ class CountryData{
   String flagsUri;
   CapitalData? capital;
   
-  CountryData(this.countryName, /*this.currencyData,*/ this.countryRegion, /*this.languages,*/ this.location, this.area, this.demonyms,this.population, this.flagsUri, {this.capital });
+  CountryData(this.countryName, this.currencyData, this.countryRegion, /*this.languages,*/ this.location, this.area, this.demonyms,this.population, this.flagsUri, {this.capital });
 }

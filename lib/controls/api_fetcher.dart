@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hhm_demo_app/models/country_data.dart';
 import 'package:hhm_demo_app/models/models.dart';
 import 'package:hhm_demo_app/controls/home_ctrl.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 List<String> regions = ["europe", "americas", "asia", "oceania", "africa"];
 String baseUrl = "https://restcountries.com/v3.1/region/";
@@ -22,11 +24,7 @@ Future<List<CountryData>>? getAllCountries() async {
           countries.add(
             CountryData(
               country["name"]["common"], 
-              /*CurrencyData(
-                Map.of(country["currencies"]).keys.first,
-                country["currencies"]["name"],
-                country["currencies"]["symbol"]
-              ), */
+              getAllCurrencies(country["currencies"]), 
               country["region"], 
               LatLng(
                 country["latlng"][0],
@@ -76,4 +74,22 @@ dynamic checkEmptyList(List<dynamic> list, int index, {dynamic returnType}){
       return 0.0;
     }
   }
+}
+
+List<CurrencyData> getAllCurrencies(Map<dynamic,dynamic> currenciesData){
+  List<CurrencyData> currencies = [];
+
+  print("Currencies : $currenciesData");
+  
+  for(String code in currenciesData.keys){
+    currencies.add(
+      CurrencyData(
+        code, 
+        currenciesData[code]["name"], 
+        currenciesData[code]["symbol"]
+      )
+    );
+  }
+
+  return currencies;
 }

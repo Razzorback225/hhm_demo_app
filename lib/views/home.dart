@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hhm_demo_app/controls/api_fetcher.dart';
@@ -36,6 +34,8 @@ class _MainPageState extends State<MainPage>{
 
               setMarkers();
 
+              //TODO : Secure API Key with google-service.json file
+
               return GoogleMap(
                 mapType: MapType.normal,
                 mapToolbarEnabled: false,
@@ -56,10 +56,6 @@ class _MainPageState extends State<MainPage>{
           }
         },
       )      
-      /*floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.my_location),
-        onPressed: goToUsr,
-      ),*/
     );
   }
 }
