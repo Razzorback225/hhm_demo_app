@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hhm_demo_app/controls/home_ctrl.dart';
 import 'package:hhm_demo_app/models/country_data.dart';
-import 'package:hhm_demo_app/models/ui/data_cards.dart';
+import 'package:hhm_demo_app/ui/data_cards.dart';
 
 class CountryPage extends StatefulWidget{
   
@@ -24,7 +22,7 @@ class _CountryPageState extends State<CountryPage>{
       appBar: AppBar(
         foregroundColor: Colors.black,
         title: Text(
-          country.countryName,
+          country.countryName!,
           style: const TextStyle(
             fontWeight: FontWeight.bold
           ),

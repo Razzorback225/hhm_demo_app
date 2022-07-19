@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hhm_demo_app/controls/api_fetcher.dart';
+import 'package:hhm_demo_app/tools/api_fetcher.dart';
 import 'package:hhm_demo_app/controls/home_ctrl.dart';
 import 'package:hhm_demo_app/models/country_data.dart';
 
@@ -14,16 +14,10 @@ class MainPage extends StatefulWidget{
 class _MainPageState extends State<MainPage>{
   
   @override
-  void initState(){
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context){
-    ctxt = context;
     return Scaffold(
       body: FutureBuilder<List<CountryData>>(
-        future: getAllCountries(),
+        future: apiFetcher.getAllCountries(),
         builder: (context, snapshot){
           if(snapshot.connectionState != ConnectionState.done){
             //Display circular progress modal
@@ -32,14 +26,13 @@ class _MainPageState extends State<MainPage>{
           else if(snapshot.connectionState == ConnectionState.done){
             if(snapshot.hasData){
 
-              setMarkers();
-
-              //TODO : Secure API Key with google-service.json file
+              setMarkers(context);
 
               return GoogleMap(
                 mapType: MapType.normal,
                 mapToolbarEnabled: false,
                 zoomControlsEnabled: false,
+                myLocationEnabled: true,
                 markers: markers,
                 initialCameraPosition: initCam,
                 onMapCreated: (GoogleMapController controller){
@@ -47,12 +40,12 @@ class _MainPageState extends State<MainPage>{
                 },
               );
             }
-            else{
+            else {
               return const Center(child:Text("No data"));
             }
           }
-          else{
-            return const Center(child: Text("Error"),);
+          else {
+            return const Center(child: Text("Error"));
           }
         },
       )      
