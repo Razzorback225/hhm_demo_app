@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
-import 'package:hhm_demo_app/controls/api_fetcher.dart';
+import 'package:hhm_demo_app/tools/api_fetcher.dart';
 import 'package:hhm_demo_app/models/country_data.dart';
 
 Completer<GoogleMapController> c_controller = Completer();
@@ -13,22 +13,18 @@ CameraPosition initCam = const CameraPosition(
   zoom: 5.5
 );
 
-void goToUsr(){
-  
+void openCountryPage(BuildContext context, CountryData country) {
+  Navigator.pushNamed(context, 'country', arguments: country);
 }
 
-void openCountryPage(CountryData country){
-  Navigator.pushNamed(ctxt!, 'country', arguments: country);
-}
-
-void setMarkers(){
-  for(CountryData country in countries) {
+void setMarkers(BuildContext context){
+  for (CountryData country in countries) {
     markers.add(
       Marker(
-        markerId: MarkerId(country.countryName),
-        onTap: () => openCountryPage(country),
+        markerId: MarkerId(country.countryName!),
+        onTap: () => openCountryPage(context, country),
         icon: BitmapDescriptor.defaultMarker,
-        position: country.location
+        position: country.location!
       )
     );
   }
