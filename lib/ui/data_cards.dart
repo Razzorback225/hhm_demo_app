@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hhm_demo_app/controls/dms_convert.dart';
+import 'package:hhm_demo_app/tools/dms_convert.dart';
 import 'package:hhm_demo_app/models/country_data.dart';
 
 class CountryCard extends StatelessWidget{
@@ -11,7 +11,7 @@ class CountryCard extends StatelessWidget{
   @override
   Widget build(BuildContext context){
 
-    Map location = convertToDMS(country.location);
+    DMSCoordinates dmsLocation = country.location!.convertToDMS();
 
     return Card(
       elevation: 0,
@@ -47,7 +47,7 @@ class CountryCard extends StatelessWidget{
             Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               child: Container(
-                child : Image.network(country.flagsUri, width: 80,),
+                child : Image.network(country.flagUri!, width: 80,),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20)
                 ),
@@ -55,13 +55,13 @@ class CountryCard extends StatelessWidget{
               elevation: 0,
             ),
             Text(
-              "Latitude : ${location["lat"]/*country.location.latitude*/}",
+              "Latitude : ${dmsLocation.lat/*country.location.latitude*/}",
               style: const TextStyle(
                 fontSize : 18
               ),
             ),
             Text(
-              "Longitude : ${location["long"]/*country.location.longitude*/}",
+              "Longitude : ${dmsLocation.long/*country.location.longitude*/}",
               style: const TextStyle(
                 fontSize : 18
               ),
@@ -100,13 +100,13 @@ class CountryCard extends StatelessWidget{
             ),
             const SizedBox(height: 5,),
             Text(
-              "Demonym (male) : ${country.demonyms[1].name}",
+              "Demonym (male) : ${country.demonyms!.elementAt(1).name}",
               style: const TextStyle(
                 fontSize : 18
               ),
             ),
             Text(
-              "Demonym (male) : ${country.demonyms[0].name}",
+              "Demonym (male) : ${country.demonyms!.elementAt(0).name}",
               style: const TextStyle(
                 fontSize : 18
               ),
@@ -132,14 +132,14 @@ class CountryCard extends StatelessWidget{
               ],
             ),
             Text(
-              "Currency : ${country.currencyData[0].currencyName}",
+              "Currency : ${country.currenciesList!.first.currencyName}",
               style: const TextStyle(
                 fontSize : 18
               ),
             ),
             //TODO : Fix symbol display issue                  
             Text(
-              "Currency Symbol : ${country.currencyData[0].currencySymbol}",
+              "Currency Symbol : ${country.currenciesList!.first.currencySymbol}",
               style: const TextStyle(
                 fontSize : 18,
               ),
