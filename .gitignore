@@ -45,7 +45,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-google-service.json
+pubspec.lock
 
-pubspec.lock
-pubspec.lock
+/android/app/src/main/res/keys.xml
