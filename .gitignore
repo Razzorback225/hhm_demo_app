@@ -47,4 +47,4 @@ app.*.map.json
 
 pubspec.lock
 
-/android/app/src/main/res/keys.xml
+/android/app/src/main/res/values/keys.xml
