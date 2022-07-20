@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hhm_demo_app/controls/country_ctrl.dart';
 import 'package:hhm_demo_app/models/country_data.dart';
-import 'package:hhm_demo_app/ui/data_cards.dart';
+import 'package:hhm_demo_app/ui/geo_card.dart';
+import 'package:hhm_demo_app/ui/pop_card.dart';
+import 'package:hhm_demo_app/ui/fin_card.dart';
+
 
 class CountryPage extends StatefulWidget{
   
@@ -12,7 +16,13 @@ class CountryPage extends StatefulWidget{
   _CountryPageState createState() => _CountryPageState();
 }
 
-class _CountryPageState extends State<CountryPage>{
+class _CountryPageState extends State<CountryPage> with SingleTickerProviderStateMixin{
+  
+  void initState(){
+    tabController = TabController(length: numPages, vsync: this);
+    super.initState();
+  }  
+  
   @override
   Widget build(BuildContext context){
 
@@ -30,12 +40,30 @@ class _CountryPageState extends State<CountryPage>{
         backgroundColor: Colors.yellow,
         elevation: 0,
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(10),
-        children: [
-          CountryCard(country)
-        ],
-      ),
+      body : Column (
+        children : [
+          Container(
+            child: TabPageSelector(
+              controller: tabController,
+              selectedColor: Colors.yellow,
+              color: Colors.black 
+            ),
+          ),
+          Expanded(
+            child: Padding (
+              padding: const EdgeInsets.all(10),
+              child : TabBarView (
+                controller: tabController,
+                children: [
+                  GeoCard(country: country, parentContext: context,),
+                  PopCard(country: country, parentContext: context,),
+                  FinCard(country: country, parentContext: context,),
+                ],
+              ),
+            )
+          ),
+        ]
+      )
     );
   }
 }
