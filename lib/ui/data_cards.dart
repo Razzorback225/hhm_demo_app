@@ -4,9 +4,8 @@ import 'package:hhm_demo_app/models/country_data.dart';
 
 class CountryCard extends StatelessWidget{
   final CountryData country;
-  CountryCard(this.country, {Key? key}):super(key: key);
-
-  BuildContext? cont;
+  
+  const CountryCard(this.country, {Key? key}):super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -20,6 +19,7 @@ class CountryCard extends StatelessWidget{
       ),
       child: Container(
         padding: const EdgeInsets.all(10),
+        height: MediaQuery.of(context).size.height / 2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: const LinearGradient(
@@ -47,7 +47,20 @@ class CountryCard extends StatelessWidget{
             Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               child: Container(
-                child : Image.network(country.flagUri!, width: 80,),
+                child : Image.network(
+                  country.flagUri!, 
+                  width: 80,
+                  loadingBuilder: ((context, child, loadingProgress) {
+                    if(loadingProgress == null ){
+                      return child;
+                    }
+                    else{
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
+                ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20)
                 ),
@@ -55,13 +68,13 @@ class CountryCard extends StatelessWidget{
               elevation: 0,
             ),
             Text(
-              "Latitude : ${dmsLocation.lat/*country.location.latitude*/}",
+              "Latitude : ${dmsLocation.lat}"/*"${country.location.latitude}°"*/,
               style: const TextStyle(
                 fontSize : 18
               ),
             ),
             Text(
-              "Longitude : ${dmsLocation.long/*country.location.longitude*/}",
+              "Longitude : ${dmsLocation.long}"/*"${country.location.longitude}°*/,
               style: const TextStyle(
                 fontSize : 18
               ),
