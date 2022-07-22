@@ -7,10 +7,7 @@ import 'package:hhm_demo_app/ui/fin_card.dart';
 
 
 class CountryPage extends StatefulWidget{
-  
-  CountryData? country;
-
-  CountryPage({Key? key}):super(key: key);
+  const CountryPage({Key? key}):super(key: key);
 
   @override
   _CountryPageState createState() => _CountryPageState();
@@ -18,6 +15,7 @@ class CountryPage extends StatefulWidget{
 
 class _CountryPageState extends State<CountryPage> with SingleTickerProviderStateMixin{
   
+  @override
   void initState(){
     tabController = TabController(length: numPages, vsync: this);
     super.initState();
@@ -44,12 +42,10 @@ class _CountryPageState extends State<CountryPage> with SingleTickerProviderStat
         padding: const EdgeInsets.all(10),
         child: Column (
           children : [
-            Container(
-              child: TabPageSelector(
-                controller: tabController,
-                selectedColor: Colors.yellow,
-                color: Colors.black 
-              ),
+            TabPageSelector(
+              controller: tabController,
+              selectedColor: Colors.yellow,
+              color: Colors.black 
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height/2,
