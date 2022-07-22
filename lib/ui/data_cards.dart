@@ -150,7 +150,6 @@ class CountryCard extends StatelessWidget{
                 fontSize : 18
               ),
             ),
-            //TODO : Fix symbol display issue                  
             Text(
               "Currency Symbol : ${country.currenciesList!.first.currencySymbol}",
               style: const TextStyle(
