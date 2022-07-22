@@ -40,29 +40,30 @@ class _CountryPageState extends State<CountryPage> with SingleTickerProviderStat
         backgroundColor: Colors.yellow,
         elevation: 0,
       ),
-      body : Column (
-        children : [
-          Container(
-            child: TabPageSelector(
-              controller: tabController,
-              selectedColor: Colors.yellow,
-              color: Colors.black 
+      body : Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column (
+          children : [
+            Container(
+              child: TabPageSelector(
+                controller: tabController,
+                selectedColor: Colors.yellow,
+                color: Colors.black 
+              ),
             ),
-          ),
-          Expanded(
-            child: Padding (
-              padding: const EdgeInsets.all(10),
-              child : TabBarView (
+            SizedBox(
+              height: MediaQuery.of(context).size.height/2,
+              child: TabBarView (
                 controller: tabController,
                 children: [
-                  GeoCard(country: country, parentContext: context,),
-                  PopCard(country: country, parentContext: context,),
-                  FinCard(country: country, parentContext: context,),
+                  GeoCard(country: country),
+                  PopCard(country: country),
+                  FinCard(country: country),
                 ],
               ),
-            )
-          ),
-        ]
+            ),
+          ]
+        )
       )
     );
   }

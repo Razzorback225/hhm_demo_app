@@ -6,14 +6,12 @@ class FinCard extends StatelessWidget {
   double? cardRadius;
   final CountryData? country;
   List<Color>? colors;
-  BuildContext? parentContext;
 
   FinCard (
     {
       this.elevation = 0,
       this.cardRadius = 10, 
       required this.country,
-      required this.parentContext,
       this.colors = const [Colors.yellow, Colors.white], 
       Key? key
     }
@@ -29,7 +27,6 @@ class FinCard extends StatelessWidget {
       ),
       child: Container(
         padding: const EdgeInsets.all(10),
-        height: MediaQuery.of(parentContext!).size.height / 2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: LinearGradient(
