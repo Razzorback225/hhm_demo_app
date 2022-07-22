@@ -17,7 +17,7 @@ class _MainPageState extends State<MainPage>{
   Widget build(BuildContext context){
     return Scaffold(
       body: FutureBuilder<List<CountryData>>(
-        future: apiFetcher.getAllCountries(),
+        future: apiFetcher.getAllCountries(context),
         builder: (context, snapshot){
           if(snapshot.connectionState != ConnectionState.done){
             //Display circular progress modal
