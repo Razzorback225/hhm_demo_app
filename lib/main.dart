@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hhm_demo_app/views/home.dart';
 import 'package:hhm_demo_app/views/country.dart';
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       title: 'Happy Hour Demo',
       theme: ThemeData(
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "home",
       routes: {
         "home" : (context) => const MainPage(),
-        "country" : (context) => CountryPage()
+        "country" : (context) => const CountryPage()
       },
     );
   }
