@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-late final TabController tabController;
-final int numPages = 3;
+late TabController tabController;
+const int numPages = 3;
 
