@@ -36,7 +36,9 @@ class _MainPageState extends State<MainPage>{
                 markers: markers,
                 initialCameraPosition: initCam,
                 onMapCreated: (GoogleMapController controller){
-                  cController.complete(controller);
+                  if(!cController.isCompleted) {
+                    cController.complete(controller);
+                  }
                 },
               );
             }
